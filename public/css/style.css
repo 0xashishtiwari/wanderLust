@@ -1,0 +1,186 @@
+body{
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+/* === Modern Navbar Styling === */
+.navbar {
+    background-color: #fff;
+    height: 5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.navbar:hover {
+    background-color: #f8f8f8;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.fa-compass:hover {
+    transform: rotate(15deg) scale(1.1);
+}
+
+.nav-link {
+    color: #222;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background-color: #fe424d;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #fe424d;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* === Footer Styling === */
+.f-info {
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 100%;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222;
+    margin: 0 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.f-info-links a:hover {
+    color: #fe424d;
+    text-decoration: underline;
+}
+
+.f-info-socials i {
+    font-size: 1.3rem;
+    margin: 0 0.5rem;
+    color: #222;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.f-info-socials i:hover {
+    transform: scale(1.2) rotate(5deg);
+    color: #fe424d;
+}
+
+
+
+
+/* === Card Container === */
+.card {
+    border: none !important;
+    margin-bottom: 2rem !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    overflow: hidden !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    background-color: #ffffff !important;
+}
+
+.card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15) !important;
+    cursor: pointer !important;
+}
+
+/* === Card Image === */
+.card-img-top {
+    width: 100% !important;
+    height: 220px !important; /* Uniform height for consistent layout */
+    object-fit: cover !important; /* Maintains aspect ratio and fills container */
+    object-position: center center !important; /* Focuses center of image */
+    display: block !important;
+    border-radius: 1rem 1rem 0 0 !important;
+    background-color: #f0f0f0 !important; /* Placeholder background */
+    image-rendering: auto !important; /* Ensures crisp rendering */
+    transition: transform 0.3s ease, filter 0.3s ease !important;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.02) !important;
+    filter: brightness(1.05) !important;
+}
+
+/* === Card Body === */
+.card-body {
+    padding: 1.25rem !important;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa) !important;
+}
+
+/* === Text Styling === */
+.card-title {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: #222 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+    color: #444 !important;
+    line-height: 1.6 !important;
+    margin: 0 0 0.5rem 0 !important;
+}
+
+/* === Optional Button Styling === */
+.card .btn {
+    margin-top: 1rem !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
+.card .btn:hover {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+}
+
+
+
+.listing-link{
+    text-decoration: none;
+}
+
+/* Card effect */

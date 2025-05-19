@@ -7,7 +7,8 @@ const Listing  = require('./models/listing');
 const path = require('path');
 app.set('view engine' , 'ejs');
 app.set('views' , path.join(__dirname , '/views'));
-
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 async function main() {
   try {
@@ -20,6 +21,8 @@ async function main() {
 
 main();
 
+
+
 app.get("/", (req, res) => {
   res.send("Root is working");
 });
@@ -27,11 +30,42 @@ app.get("/", (req, res) => {
 
 //--------------INDEX ROUTE------------------
 
+
 app.get('/listings' , async (req , res)=>{
    const allListings = await Listing.find({});
    res.render('listings/index.ejs' , {allListings} );
   //  console.log(result);
 });
+
+//---------------New Listings Route------------
+
+app.get('/listings/new' , (req ,res)=>{
+  res.render('listings/new.ejs');
+});
+
+
+
+//--------------SHOW ROUTE---------------------
+
+app.get('/listings/:id' , async (req ,res)=>{
+  let {id} = req.params;
+  const listing  =  await Listing.findById(id);
+  res.render('listings/show.ejs' , {listing});
+})
+
+
+//----------Create ROUTE------------------------
+
+app.post('/listings' , async(req ,res)=>{
+    // let {title , description , country  , location , price ,image} = req.body;
+    // console.log(req.body);
+    console.log(req.body.listing);
+   const newListing = new Listing(req.body.listing); 
+  console.log(newListing);
+   await newListing.save();
+   res.redirect('/listings');
+});
+
 
 
 

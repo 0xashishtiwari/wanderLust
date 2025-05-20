@@ -1,21 +1,66 @@
-
 <% layout('/layouts/boilerplate') %>
 
 
-    <h3>Create a New Listing </h3>
-    <form method="post" action="/listings/<%=listing._id%>?_method=PUT">
-        <input name="listing[title]" type="text" value="<%=listing.title%>">
-        <br><br>
-        <textarea name="listing[description]" type="text" ><%=listing.description%></textarea>
-        <br><br>
-        <input name="listing[image]" type="text" value="<%=listing.image%>">
-        <br><br>
-        <input name="listing[price]" type="number" value="<%=listing.price%>">
-      <br>  <br>
-      <input name="listing[location]" type="text" value="<%=listing.location%>">
-      <br><br>
-      <input name="listing[country]" type="text" value="<%=listing.country%>">
-      <br><br>
-      <button>Add</button>
-    </form>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
 
+      <div class="card shadow-lg rounded p-4" style="max-width: 720px;" data-aos="fade-up" data-aos-duration="800">
+        <h3 class="mb-4 text-center fw-bold text-dark">Edit Listing</h3>
+
+        <form method="post" action="/listings/<%= listing._id %>?_method=PUT">
+
+          <!-- Title -->
+          <div class="mb-3" data-aos="fade-right" data-aos-delay="100">
+            <label for="title" class="form-label">Title</label>
+            <input name="listing[title]" type="text" class="form-control animate-input"
+              value="<%= listing.title %>" required>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3" data-aos="fade-left" data-aos-delay="150">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listing[description]" rows="4" class="form-control animate-input"
+              required><%= listing.description %></textarea>
+          </div>
+
+          <!-- Image -->
+          <div class="mb-3" data-aos="fade-right" data-aos-delay="200">
+            <label for="image" class="form-label">Image Link</label>
+            <input name="listing[image]" type="url" class="form-control animate-input"
+              value="<%= listing.image %>" required>
+          </div>
+
+          <!-- Price & Country -->
+          <div class="row">
+            <div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="250">
+              <label for="price" class="form-label">Price</label>
+              <input name="listing[price]" type="number" class="form-control animate-input"
+                value="<%= listing.price %>" required>
+            </div>
+            <div class="col-md-8 mb-3" data-aos="fade-up" data-aos-delay="300">
+              <label for="country" class="form-label">Country</label>
+              <input name="listing[country]" type="text" class="form-control animate-input"
+                value="<%= listing.country %>" required>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="mb-3" data-aos="fade-left" data-aos-delay="350">
+            <label for="location" class="form-label">Location</label>
+            <input name="listing[location]" type="text" class="form-control animate-input"
+              value="<%= listing.location %>" required>
+          </div>
+
+          <!-- Button -->
+          <div class="d-flex justify-content-center mt-3" data-aos="zoom-in" data-aos-delay="400">
+           <button type="submit" class="btn btn-custom-red shadow-sm hover-zoom px-4">Update Listing</button>
+
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

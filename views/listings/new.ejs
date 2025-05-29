@@ -7,13 +7,14 @@
       <div class="card shadow-lg rounded p-4" style="max-width: 720px;" data-aos="fade-up" data-aos-duration="800">
         <h3 class="mb-4 text-center fw-bold text-dark">Create a New Listing</h3>
 
-        <form method="post" action="/listings">
+        <form method="post" action="/listings" class="needs-validation" novalidate >
 
           <!-- Title -->
           <div class="mb-3" data-aos="fade-right" data-aos-delay="100">
             <label for="title" class="form-label">Title</label>
             <input name="listing[title]" type="text" class="form-control animate-input"
               placeholder="Add a catchy title" required>
+              <div class="valid-feedback">Title looks good!</div>
           </div>
 
           <!-- Description -->
@@ -21,6 +22,7 @@
             <label for="description" class="form-label">Description</label>
             <textarea name="listing[description]" rows="4" class="form-control animate-input"
               placeholder="Brief description..." required></textarea>
+              <div class="invalid-feedback">Please enter a short description</div>
           </div>
 
           <!-- Image -->
@@ -36,11 +38,13 @@
               <label for="price" class="form-label">Price</label>
               <input name="listing[price]" type="number" class="form-control animate-input" placeholder="e.g., 1200"
                 required>
+                <div class="invalid-feedback">Price should be valid</div>
             </div>
             <div class="col-md-8 mb-3" data-aos="fade-up" data-aos-delay="300">
               <label for="country" class="form-label">Country</label>
               <input name="listing[country]" type="text" class="form-control animate-input" placeholder="e.g., India"
                 required>
+                  <div class="invalid-feedback">Country name should be valid</div>
             </div>
           </div>
 
@@ -49,6 +53,7 @@
             <label for="location" class="form-label">Location</label>
             <input name="listing[location]" type="text" class="form-control animate-input"
               placeholder="e.g., Jaipur, Rajasthan" required>
+                <div class="invalid-feedback">Location should be valid</div>
           </div>
 
           <!-- Button -->

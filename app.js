@@ -9,7 +9,9 @@ const methodOverride = require('method-override')
 const ejsMate = require('ejs-mate');
 const wrapAsync = require('./utils/WrapAsync')
 const ExpressError = require('./utils/ExpressError');
-const {listingSchema} = require('./schema');
+const {listingSchema , reviewSchema} = require('./schema');
+
+const {Review} = require('./models/review');
 
 app.use(express.static(path.join(__dirname,'/public')));
 app.set('view engine' , 'ejs');
@@ -49,6 +51,16 @@ const validateListing = (req , res , next)=>{
     }
 };
 
+const validateReview = (req  ,res , next)=>{
+    let {error} = reviewSchema.validate(req.body);
+    if(error){
+      let errmsg = error.details.map((el)=>el.message).join(' ');
+      throw new ExpressError(400 , errmsg);
+
+    }else{
+      next();
+    }
+}
 
 
 //--------------INDEX ROUTE------------------
@@ -72,7 +84,7 @@ app.get('/listings/new' , (req ,res)=>{
 
 app.get('/listings/:id' , wrapAsync(async (req ,res)=>{
   let {id} = req.params;
-  const listing  =  await Listing.findById(id);
+  const listing  =  await Listing.findById(id).populate('reviews');
   res.render('listings/show.ejs' , {listing});
 }));
 
@@ -116,8 +128,30 @@ app.delete('/listings/:id' , wrapAsync(async(req , res)=>{
    res.redirect('/listings');
 }));
 
+//--------------Review POST Route------------------------
+
+app.post('/listings/:id/reviews' ,validateReview ,  wrapAsync( async(req , res)=>{
+    let {id} = req.params
+    let listing =  await Listing.findById(id);
+    let newReview = new Review(req.body.review);
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    res.redirect(`/listings/${id}`);
+}));
 
 
+//------------DELETE Review Route----------------------
+
+app.delete('/listings/:id/reviews/:reviewId' , wrapAsync(async(req ,res)=>{
+    let {id , reviewId} = req.params; 
+    Listing.findByIdAndUpdate(id , {$pull : {reviews : reviewId}}); // removing data from the listing review array using $pull
+    await Review.findByIdAndDelete(reviewId);
+
+    res.redirect(`/listings/${id}`);
+}));
 
 // app.get('/testListing' , async (req, res)=>{
 //     let sampleListing = new Listing({
@@ -148,6 +182,6 @@ app.use((err , req, res, next)=>{
 
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is listening to port : ${PORT}`);
 });

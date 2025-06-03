@@ -1,0 +1,45 @@
+<% layout('/layouts/boilerplate') %>
+
+    <section class="container mt-5">
+        <div class="row justify-content-center">
+            <h2 class="col-12 text-center mb-4">Sign Up on WanderLust</h2>
+            <div class="col-md-6">
+                <form action="/signup" method="POST" class="needs-validation" novalidate>
+
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" required
+                            autocomplete="username" aria-describedby="usernameFeedback">
+                        <div id="usernameFeedback" class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required autocomplete="email"
+                            aria-describedby="emailHelp">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required
+                            autocomplete="new-password" aria-describedby="passwordHelp">
+                        <div class="invalid-feedback">
+                            Please provide a password.
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-success w-100">Sign Up</button>
+
+                </form>
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,22 @@
+<% if (success && success.length) { %>
+  <div id="flash-success" class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow" role="alert" style="z-index: 1055; min-width: 300px;">
+    <%= success %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<% if (error && error.length) { %>
+  <div id="flash-error" class="alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-5 shadow" role="alert" style="z-index: 1055; min-width: 300px;">
+    <%= error %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<script>
+  setTimeout(() => {
+    const successAlert = document.getElementById('flash-success');
+    const errorAlert = document.getElementById('flash-error');
+    if (successAlert) bootstrap.Alert.getOrCreateInstance(successAlert).close();
+    if (errorAlert) bootstrap.Alert.getOrCreateInstance(errorAlert).close();
+  }, 5000); // auto-dismiss in 5 seconds
+</script>

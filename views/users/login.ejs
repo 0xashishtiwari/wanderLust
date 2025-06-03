@@ -1,0 +1,33 @@
+<% layout('/layouts/boilerplate') %>
+
+    <section class="container mt-5">
+        <div class="row justify-content-center">
+            <h2 class="col-12 text-center mb-4">Login</h2>
+            <div class="col-md-6">
+                <form action="/login" method="POST" class="needs-validation" novalidate>
+
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" required
+                            autocomplete="username" aria-describedby="usernameFeedback">
+                       
+                    </div>
+
+                   
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required
+                            autocomplete="new-password" aria-describedby="passwordHelp">
+                       
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-success w-100">Login</button>
+
+                </form>
+            </div>
+        </div>
+    </section>

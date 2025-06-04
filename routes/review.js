@@ -5,21 +5,7 @@ const {Review} = require('../models/review');
 const {reviewSchema} = require('../schema');
 const wrapAsync = require('../utils/WrapAsync');
 const Listing = require('../models/listing');
-
-
-//----------server side schema validation
-
-const validateReview = (req  ,res , next)=>{
-    let {error} = reviewSchema.validate(req.body);
-    if(error){
-      let errmsg = error.details.map((el)=>el.message).join(' ');
-      throw new ExpressError(400 , errmsg);
-
-    }else{
-      next();
-    }
-}
-
+const { validateReview} = require('../middleware');
 
 //--------------Review POST Route------------------------
 

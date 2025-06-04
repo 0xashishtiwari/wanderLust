@@ -26,7 +26,9 @@
                         <li class="list-group-item"><strong>Location:</strong> <%= listing.location %></li>
                         <li class="list-group-item"><strong>Country:</strong> <%= listing.country %></li>
                     </ul>
-                 
+                    
+                   <% if(currUser && listing.owner._id.equals(currUser._id)){ %>
+
                          <div class="d-flex justify-content-between">
                         <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-primary">Edit Listing</a>
 
@@ -34,7 +36,7 @@
                             <button type="submit" class="btn btn-outline-danger">Delete</button>
                         </form>
                     </div>
-                   
+                   <% }%>
                    
                 </div>
             </div>
@@ -44,8 +46,11 @@
 
 
 
+
+
 <div class="col-lg-8">
     <hr class="mb-4">
+        <%if(currUser){ %>
     <h4 class="mb-3">Leave a Review</h4>
 
     <form action="/listings/<%- listing._id %>/reviews" method="post" novalidate class="needs-validation">
@@ -80,7 +85,7 @@
     </form>
 
     <hr class="my-5">
-
+    <% }%>
 
    <!-- Reviews Section -->
      <h5 class="mb-4"><strong>All Reviews</strong></h5>
@@ -89,7 +94,7 @@
           <div class="col-md-6">
             <article class="card shadow-sm h-100">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted"><%= review.author || 'Anonymous' %></h6>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= review.author.username %></h6>
                     <p class="card-text mb-1"><%- review.comment %></p>
                     <p class="card-text">
                         <span class="badge bg-warning text-dark">

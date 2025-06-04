@@ -3,31 +3,36 @@ const router = express.Router();
 const wrapAsync = require('../utils/WrapAsync');
 const Listing  = require('../models/listing');
 const ExpressError = require('../utils/ExpressError');
-const listingController = require('../controllers/listing');
+const listingController = require('../controllers/listings');
 const {isLoggedIn , validateListing ,isOwner } = require('../middleware');
 
 
+
+
 //--------------INDEX ROUTE------------------
+//----------Create ROUTE------------------------
+router.route('/')
+.get( wrapAsync(listingController.index))
+.post(isLoggedIn,validateListing , wrapAsync(listingController.createListing));
 
-
-router.get('/' , wrapAsync(listingController.index));
 
 
 //---------------New Listings Route------------
-
 router.get('/new',isLoggedIn , listingController.renderNewForm);
 
 
 
+
 //--------------SHOW ROUTE---------------------
+//--------------UPDATE ROUTE----------------------
+//-------------DELETE ROUTE-----------------------
+router.route('/:id')
+.get( wrapAsync(listingController.showListing))
+.put(isLoggedIn ,isOwner, validateListing, wrapAsync(listingController.updateListing))
+.delete(isLoggedIn,isOwner, wrapAsync(listingController.deleteListing));
 
-router.get('/:id' , wrapAsync(listingController.showListing));
 
 
-
-//----------Create ROUTE------------------------
-
-router.post('/' ,isLoggedIn,validateListing , wrapAsync(listingController.createListing));
 
 
 //-------------Edit ROUTE-------------------------
@@ -35,14 +40,9 @@ router.post('/' ,isLoggedIn,validateListing , wrapAsync(listingController.create
 router.get('/:id/edit',isLoggedIn ,isOwner, wrapAsync(listingController.renderEditForm));
 
 
-//--------------UPDATE ROUTE----------------------
-router.put('/:id' ,isLoggedIn ,isOwner, validateListing, wrapAsync(listingController.updateListing));
 
 
 
-//-------------DELETE ROUTE-----------------------
-
-router.delete('/:id' ,isLoggedIn,isOwner, wrapAsync(listingController.deleteListing));
 
 
 module.exports = router;

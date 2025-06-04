@@ -349,12 +349,12 @@ let sampleListings = [
   },
 ];
 
-console.log(sampleListings.length);
+// console.log(sampleListings.length);
 
-sampleListings = sampleListings.map((obj)=>{
-    obj.image  = obj.image.url;
-    return obj;
-});
+// sampleListings = sampleListings.map((obj)=>{
+//     obj.image  = obj.image.url;
+//     return obj;
+// });
 
 // sampleListings = sampleListings.map((obj)=>{
 //     console.log(obj);

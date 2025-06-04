@@ -1,3 +1,8 @@
+if(process.env.NODE_ENV != "production"){
+  require('dotenv').config()
+ 
+}
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -18,6 +23,7 @@ const User = require('./models/user.js');
 const ListingRouter = require('./routes/listing.js');
 const ReviewRouter = require('./routes/review.js');
 const UserRouter = require('./routes/user.js');
+
 
 app.use(express.static(path.join(__dirname,'/public')));
 app.set('view engine' , 'ejs');

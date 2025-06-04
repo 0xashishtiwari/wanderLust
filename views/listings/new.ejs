@@ -7,7 +7,7 @@
       <div class="card shadow-lg rounded p-4" style="max-width: 720px;" data-aos="fade-up" data-aos-duration="800">
         <h3 class="mb-4 text-center fw-bold text-dark">Create a New Listing</h3>
 
-        <form method="post" action="/listings" class="needs-validation" novalidate >
+        <form method="post" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
 
           <!-- Title -->
           <div class="mb-3" data-aos="fade-right" data-aos-delay="100">
@@ -27,16 +27,17 @@
 
           <!-- Image -->
           <div class="mb-3" data-aos="fade-right" data-aos-delay="200">
-            <label for="image" class="form-label">Image Link</label>
-            <input name="listing[image]"  class="form-control animate-input" placeholder="Enter image URL"
+            <label for="image" class="form-label">Image</label>
+            <input name="listing[image]" type="file"  class="form-control animate-input" placeholder="Upload image"
               required>
+              <div class="invalid-feedback">Please upload a image</div>
           </div>
 
           <!-- Price & Country -->
           <div class="row">
             <div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="250">
               <label for="price" class="form-label">Price</label>
-              <input name="listing[price]" class="form-control animate-input" placeholder="e.g., 1200"
+              <input name="listing[price]" class="form-control animate-input" type="number" placeholder="e.g., 1200"
                 required>
                 <div class="invalid-feedback">Price should be valid</div>
             </div>

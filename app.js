@@ -54,7 +54,7 @@ async function main() {
 main();
 
 app.get("/", (req, res) => {
-  res.send("Root is working");
+  res.redirect('/listings');
 });
 
 app.use(session(sessionOptions));

@@ -7,7 +7,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const PORT = 8080;
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl = process.env.ATLASDB_URL ;
+
+
 
 const path = require('path');
 const methodOverride = require('method-override')
@@ -15,6 +18,8 @@ const ejsMate = require('ejs-mate');
 
 const ExpressError = require('./utils/ExpressError');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -33,7 +38,21 @@ app.use(express.json());
 app.use(methodOverride('_method'))
 app.engine('ejs', ejsMate);
 
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto :  {
+      secret : "mysupersecretKey"
+    },
+    touchAfter : 24 * 3600
+  });
+
+  store.on('error' , ()=>{
+    console.log("Error in mongo session store");
+  });
+
 const sessionOptions = {
+  store : store ,
   secret : "mysupersecretcode",
   resave : false,
   saveUninitialized : true,
@@ -43,9 +62,13 @@ const sessionOptions = {
     httpOnly : true
   }
 };
+
+
+
+
 async function main() {
   try {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
     console.log("Connected to database successfully");
   } catch (err) {
     console.error("Database connection error:", err);

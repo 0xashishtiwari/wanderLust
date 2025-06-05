@@ -1,165 +1,77 @@
+# checkInly
 
+**checkInly** is a web-based Listings Management System that enables users to view, create, update, and delete listings (e.g., properties or services) through a web interface. Built with Node.js, Express.js, MongoDB, and EJS, this application provides a user-friendly platform for managing listings efficiently.
 
-# **Software Requirements Specification (SRS)**
+## Features
 
-## **1. Introduction**
+* **User Authentication**: Secure login and registration system.
+* **CRUD Operations**: Create, Read, Update, and Delete listings.
+* **Responsive Design**: Mobile-friendly interface for seamless user experience.
+* **File Uploads**: Support for uploading images associated with listings.
+* **Data Validation**: Ensures data integrity with robust validation mechanisms.
 
-### 1.1 Purpose
+## Tech Stack
 
-The purpose of this document is to detail the functional and non-functional requirements of a web-based Listings Management System. This system allows users to view, create, update, and delete listings (e.g., properties or services) through a web interface.
+* **Backend**: Node.js, Express.js
+* **Database**: MongoDB
+* **Templating Engine**: EJS
+* **Authentication**: Custom session-based authentication
+* **File Storage**: Local file system (can be configured for cloud storage)
 
-### 1.2 Scope
+## Prerequisites
 
-This project is a web application built using Node.js, Express.js, MongoDB, and EJS as the templating engine. It allows users to perform CRUD operations on listings stored in a MongoDB database.
+Before running the application, ensure you have the following installed:
 
-### 1.3 Definitions, Acronyms, and Abbreviations
+* [Node.js](https://nodejs.org/) (v14 or higher)
+* [MongoDB](https://www.mongodb.com/) (local or cloud instance)
+* [npm](https://www.npmjs.com/) (Node package manager)
 
-* **CRUD**: Create, Read, Update, Delete
-* **EJS**: Embedded JavaScript Templates
-* **API**: Application Programming Interface
-* **REST**: Representational State Transfer
+## Installation
 
-### 1.4 References
+1. **Clone the Repository**
 
-* [Express.js Documentation](https://expressjs.com/)
-* [Mongoose Documentation](https://mongoosejs.com/)
-* [MongoDB Documentation](https://www.mongodb.com/docs/)
-* [EJS Documentation](https://ejs.co/)
+   ```bash
+   git clone https://github.com/0xashishtiwari/checkInly.git
+   cd checkInly
+   ```
 
----
+2. **Install Dependencies**
 
-## **2. Overall Description**
+   ```bash
+   npm install
+   ```
 
-### 2.1 Product Perspective
+3. **Configure Environment Variables**
 
-This application is a standalone web application. It interacts with a MongoDB database using Mongoose ORM and serves dynamic views using EJS templates.
+   Create a `.env` file in the root directory and add the following:
 
-### 2.2 Product Functions
+   ```env
+   MONGO_URI=your_mongodb_connection_string
+   SESSION_SECRET=your_session_secret
+   CLOUDINARY_CLOUD_NAME=your_cloud_name
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   ```
 
-* Render listings index page with all listings
-* View a single listing
-* Create new listings
-* Edit existing listings
-* Delete listings
+   Replace the placeholders with your actual credentials.
 
-### 2.3 User Classes and Characteristics
+4. **Run the Application**
 
-| User Role | Description                           |
-| --------- | ------------------------------------- |
-| Visitor   | Can view listings                     |
-| Admin     | Can create, edit, and delete listings |
+   ```bash
+   npm start
+   ```
 
-### 2.4 Operating Environment
+   The application will be accessible at `http://localhost:8080`.
 
-* Server: Node.js (v14 or higher)
-* Database: MongoDB (local or cloud)
-* Client: Any modern web browser
+## Usage
 
-### 2.5 Design and Implementation Constraints
+* **Home Page**: View all listings.
+* **Dashboard**: Manage your own listings.
+* **Create Listing**: Add new listings with images.
+* **Edit/Delete Listing**: Modify or remove existing listings.
 
-* MongoDB must be running locally on port 27017.
-* Listings must follow the schema defined in the `Listing` Mongoose model.
 
----
+## License
 
-## **3. Specific Requirements**
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### 3.1 Functional Requirements
-
-#### 3.1.1 View All Listings
-
-* **Endpoint**: `GET /listings`
-* **Description**: Fetches all listings from the database and renders them using `listings/index.ejs`.
-
-#### 3.1.2 View Single Listing
-
-* **Endpoint**: `GET /listings/:id`
-* **Description**: Fetches a listing by its ID and displays its details.
-
-#### 3.1.3 Create New Listing
-
-* **Endpoint**: `GET /listings/new`
-
-* **Description**: Renders a form for creating a new listing.
-
-* **Endpoint**: `POST /listings`
-
-* **Description**: Accepts form data and saves a new listing to the database.
-
-#### 3.1.4 Edit Listing
-
-* **Endpoint**: `GET /listings/:id/edit`
-
-* **Description**: Fetches listing data and renders an edit form.
-
-* **Endpoint**: `PUT /listings/:id`
-
-* **Description**: Updates the listing in the database based on submitted form data.
-
-#### 3.1.5 Delete Listing
-
-* **Endpoint**: `DELETE /listings/:id`
-* **Description**: Deletes the listing from the database.
-
-#### 3.1.6 Root Route
-
-* **Endpoint**: `GET /`
-* **Description**: A simple route to confirm the server is running.
-
----
-
-### 3.2 Non-Functional Requirements
-
-#### 3.2.1 Performance
-
-* Must respond to user requests within 2 seconds under normal load.
-
-#### 3.2.2 Security
-
-* Input validation for user-submitted data is required.
-* Method override is used for HTTP verbs other than GET/POST.
-
-#### 3.2.3 Maintainability
-
-* Uses MVC pattern (Model-View-Controller) to separate concerns.
-* Code should be modular with models and views clearly separated.
-
-#### 3.2.4 Availability
-
-* Application should be available 24/7 with minimal downtime.
-
----
-
-## **4. External Interface Requirements**
-
-### 4.1 User Interfaces
-
-* Rendered using EJS templates:
-
-  * `views/listings/index.ejs`
-  * `views/listings/show.ejs`
-  * `views/listings/new.ejs`
-  * `views/listings/edit.ejs`
-
-### 4.2 Hardware Interfaces
-
-* Runs on any server capable of running Node.js and MongoDB.
-
-### 4.3 Software Interfaces
-
-* Node.js and Express for backend
-* MongoDB with Mongoose for database
-* EJS for templating
-* method-override for HTTP methods
-
----
-
-## **5. Appendix**
-
-### 5.1 Future Enhancements
-
-* Implement user authentication
-* Add image uploads using cloud storage
-* Pagination and search functionality for listings
-
----

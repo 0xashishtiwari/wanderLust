@@ -7,7 +7,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const PORT = 8080;
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+
 const dbUrl = process.env.ATLASDB_URL ;
 
 
@@ -42,7 +42,7 @@ app.engine('ejs', ejsMate);
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto :  {
-      secret : "mysupersecretKey"
+      secret : process.env.SECRET
     },
     touchAfter : 24 * 3600
   });
@@ -53,7 +53,7 @@ const store = MongoStore.create({
 
 const sessionOptions = {
   store : store ,
-  secret : "mysupersecretcode",
+  secret :  process.env.SECRET,
   resave : false,
   saveUninitialized : true,
   cookie:{
